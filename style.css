@@ -41,8 +41,9 @@ button {
 }
 
 #pdfViewer {
-    margin: 0 auto;
-    max-width: 800px;
+    margin: 20px auto; /* Center the viewer */
+    max-width: 100%; /* Ensure the viewer is not wider than the screen */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
 }
 
 @media (max-width: 600px) {
