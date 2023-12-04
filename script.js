@@ -4,7 +4,8 @@ function loadPDF() {
     const pdfViewer = document.getElementById('pdfViewer');
 
     // PDF.js logic to display the PDF
-    const loadingTask = pdfjsLib.getDocument({ url: `path/to/pdfs/${pdfName}.pdf`, password: pdfPassword });
+    //const loadingTask = pdfjsLib.getDocument({ url: `path/to/pdfs/${pdfName}.pdf`, password: pdfPassword });
+    const loadingTask = pdfjsLib.getDocument({ url: `${pdfName}.pdf`, password: pdfPassword });
 
     loadingTask.promise.then(function (pdfDoc) {
         // Set up the viewer
