@@ -41,11 +41,18 @@ button {
 }
 
 #pdfViewer {
-    margin-top: 20px;
+    margin: 0 auto;
+    max-width: 800px;
 }
 
-/* Add styles for the page container */
-.page-container {
-    margin-bottom: 20px;
+@media (max-width: 600px) {
+    #pdfViewer {
+        max-width: 100%; /* Adjust for smaller screens */
+    }
 }
+
+.page-container {
+    margin-bottom: 10px; /* Adjust margin for smaller screens */
+}
+
 
