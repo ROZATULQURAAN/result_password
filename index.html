@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>MAKTAB - Kharalwadi</title>
+</head>
+<body>
+    <div class="container">
+        <h1>MAKTAB</h1>
+        <h2>Kharalwadi</h2>
+        <label for="pdfName">PDF Name (without extension):</label>
+        <input type="text" id="pdfName" placeholder="Enter PDF name">
+        <label for="pdfPassword">PDF Password:</label>
+        <input type="password" id="pdfPassword" placeholder="Enter PDF password">
+        <button onclick="loadPDF()">Load PDF</button>
+        <div id="pdfViewer"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
