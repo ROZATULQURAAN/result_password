@@ -3,11 +3,41 @@ function loadPDF() {
     const pdfPassword = document.getElementById('pdfPassword').value;
     const pdfViewer = document.getElementById('pdfViewer');
 
-    // You may need to use a PDF viewer library here (e.g., pdf.js) to load and display the PDF.
-    // Add your logic to handle password-protected PDFs.
-    // You can customize this according to your requirements.
-    // Refer to the documentation of the PDF viewer library you choose.
+    // PDF.js logic to display the PDF
+    const loadingTask = pdfjsLib.getDocument({ url: `path/to/pdfs/${pdfName}.pdf`, password: pdfPassword });
 
-    // For example (using pdf.js):
-    pdfViewer.innerHTML = `<iframe src="path/to/pdf-viewer.html?name=${pdfName}&password=${pdfPassword}" width="100%" height="500px"></iframe>`;
+    loadingTask.promise.then(function (pdfDoc) {
+        // Set up the viewer
+        const pdfViewer = document.getElementById('pdfViewer');
+        pdfViewer.innerHTML = ''; // Clear previous content
+
+        // Loop through each page in the PDF
+        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+            // Create a container for each page
+            const pageContainer = document.createElement('div');
+            pageContainer.className = 'page-container';
+
+            // Append the container to the viewer
+            pdfViewer.appendChild(pageContainer);
+
+            // Render the page into the container
+            pdfDoc.getPage(pageNum).then(function (pdfPage) {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                pageContainer.appendChild(canvas);
+
+                const viewport = pdfPage.getViewport({ scale: 1.5 });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                const renderTask = pdfPage.render({ canvasContext: context, viewport: viewport });
+                renderTask.promise.then(function () {
+                    // Page rendered
+                });
+            });
+        }
+    }).catch(function (error) {
+        console.error('Error loading PDF:', error);
+        pdfViewer.innerHTML = 'PDF not found or password incorrect.';
+    });
 }
