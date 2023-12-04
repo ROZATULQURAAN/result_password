@@ -1,4 +1,5 @@
 function loadPDF() {
+    console.log('Loading PDF...');
     const pdfName = document.getElementById('pdfName').value;
     const pdfPassword = document.getElementById('pdfPassword').value;
     const pdfViewer = document.getElementById('pdfViewer');
@@ -8,6 +9,7 @@ function loadPDF() {
     const loadingTask = pdfjsLib.getDocument({ url: `${pdfName}.pdf`, password: pdfPassword });
 
     loadingTask.promise.then(function (pdfDoc) {
+        console.log('PDF loaded successfully:', pdfDoc);
         // Set up the viewer
         const pdfViewer = document.getElementById('pdfViewer');
         pdfViewer.innerHTML = ''; // Clear previous content
