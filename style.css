@@ -43,3 +43,9 @@ button {
 #pdfViewer {
     margin-top: 20px;
 }
+
+/* Add styles for the page container */
+.page-container {
+    margin-bottom: 20px;
+}
+
