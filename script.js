@@ -50,13 +50,19 @@ function loadPDF() {
         }).catch(function (error) {
             console.error('Error loading PDF:', error);
             pdfViewer.innerHTML = 'PDF not found or password incorrect.';
+            alert('PDF not found or password incorrect. Please try again.');
         });
     }
 
 }
+document.getElementById("pdfPassword").addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("loadpdf").click();
+    }
+});
+
 const xHttp = new XMLHttpRequest();
-
-
 xHttp.onload = function () {
     const arrayBuffer = this.response; // Note: not req.responseText
     if (arrayBuffer) {
