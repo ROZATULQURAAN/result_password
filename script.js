@@ -1,50 +1,59 @@
 function loadPDF() {
-    console.log('Loading PDF...');
     const pdfName = document.getElementById('pdfName').value;
     const pdfPassword = document.getElementById('pdfPassword').value;
     const pdfViewer = document.getElementById('pdfViewer');
 
+    if (pdfName == 'undefined' || pdfName == null || pdfName == "") {
+        alert('Please enter PDF name');
+    }
+
+    if (pdfPassword == 'undefined' || pdfPassword == null || pdfPassword == "") {
+        alert('Please enter PDF password');
+    }
+
     // PDF.js logic to display the PDF
     //const loadingTask = pdfjsLib.getDocument({ url: `path/to/pdfs/${pdfName}.pdf`, password: pdfPassword });
-    const loadingTask = pdfjsLib.getDocument({ url: `${pdfName}.pdf`, password: pdfPassword });
+    if (pdfName != 'undefined' && pdfName != "" && pdfPassword != 'undefined' && pdfPassword != "") {
+        const loadingTask = pdfjsLib.getDocument({ url: `${pdfName}.pdf`, password: pdfPassword });
+        console.log('Loading PDF...');
+        loadingTask.promise.then(function (pdfDoc) {
+            console.log('PDF loaded successfully:', pdfDoc);
+            // Set up the viewer
+            const pdfViewer = document.getElementById('pdfViewer');
+            pdfViewer.innerHTML = ''; // Clear previous content
 
-    loadingTask.promise.then(function (pdfDoc) {
-        console.log('PDF loaded successfully:', pdfDoc);
-        // Set up the viewer
-        const pdfViewer = document.getElementById('pdfViewer');
-        pdfViewer.innerHTML = ''; // Clear previous content
+            // Loop through each page in the PDF
+            for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+                // Create a container for each page
+                const pageContainer = document.createElement('div');
+                pageContainer.className = 'page-container';
 
-        // Loop through each page in the PDF
-        for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-            // Create a container for each page
-            const pageContainer = document.createElement('div');
-            pageContainer.className = 'page-container';
+                // Append the container to the viewer
+                pdfViewer.appendChild(pageContainer);
 
-            // Append the container to the viewer
-            pdfViewer.appendChild(pageContainer);
+                // Render the page into the container
+                pdfDoc.getPage(pageNum).then(function (pdfPage) {
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    pageContainer.appendChild(canvas);
 
-            // Render the page into the container
-            pdfDoc.getPage(pageNum).then(function (pdfPage) {
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
-                pageContainer.appendChild(canvas);
+                    const viewport = pdfPage.getViewport({ scale: 1.5 });
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
 
-                const viewport = pdfPage.getViewport({ scale: 1.5 });
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-
-                const renderTask = pdfPage.render({ canvasContext: context, viewport: viewport });
-                renderTask.promise.then(function () {
-                    // Page rendered
+                    const renderTask = pdfPage.render({ canvasContext: context, viewport: viewport });
+                    renderTask.promise.then(function () {
+                        // Page rendered
+                    });
                 });
-            });
-        }
-    }).catch(function (error) {
-        console.error('Error loading PDF:', error);
-        pdfViewer.innerHTML = 'PDF not found or password incorrect.';
-    });
-}
+            }
+        }).catch(function (error) {
+            console.error('Error loading PDF:', error);
+            pdfViewer.innerHTML = 'PDF not found or password incorrect.';
+        });
+    }
 
+}
 const xHttp = new XMLHttpRequest();
 
 
