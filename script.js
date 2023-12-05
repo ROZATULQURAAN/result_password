@@ -62,6 +62,13 @@ document.getElementById("pdfPassword").addEventListener("keypress", function (ev
     }
 });
 
+document.getElementById("pdfName").addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("loadpdf").click();
+    }
+});
+
 const xHttp = new XMLHttpRequest();
 xHttp.onload = function () {
     const arrayBuffer = this.response; // Note: not req.responseText
