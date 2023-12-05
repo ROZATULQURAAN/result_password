@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<script type="module" src="build/pdf.mjs"></script>
-<script type="module" src="build/pdf.worker.mjs"></script>
+    <script type="module" src="build/pdf.mjs"></script>
+    <script type="module" src="build/pdf.worker.mjs"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>MAKTAB - Kharalwadi</title>
 </head>
+
 <body>
     <div class="container">
         <h1>ROZATUL QURAAN</h1>
         <h2>Jama Masjid, Kharalwadi, Pimpri, Pune</h2>
         <label for="pdfName">Taalib ka Naam:</label>
-        <input type="text" id="pdfName" placeholder="Talib ka naam type kare...">
-        <label for="pdfPassword">Result passcode:</label>
+        <datalist id="nameSuggestions"></datalist>
+        <input type="text" id="pdfName" placeholder="Talib ka naam type kare..." list="nameSuggestions" autocomplete="off required>
+        <label for=" pdfPassword">Result passcode:</label>
         <input type="password" id="pdfPassword" placeholder="Password type kare...">
         <button onclick="loadPDF()">Load PDF</button>
         <div id="pdfViewer"></div>
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>

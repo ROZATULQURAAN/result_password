@@ -44,3 +44,34 @@ function loadPDF() {
         pdfViewer.innerHTML = 'PDF not found or password incorrect.';
     });
 }
+
+const xHttp = new XMLHttpRequest();
+
+
+xHttp.onload = function () {
+    const arrayBuffer = this.response; // Note: not req.responseText
+    if (arrayBuffer) {
+        const byteArray = new Uint8Array(arrayBuffer);
+        byteArray.forEach((element, index) => {
+            // do something with each byte in the array
+        });
+        let fileData = byteArray;
+        let workbook = XLSX.read(fileData, { type: "array" });
+        workbook.SheetNames.forEach(sheet => {
+            let rowData = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
+            // Populate the datalist with suggestions
+            var pdfSuggestionsList = document.getElementById('nameSuggestions');
+            rowData.forEach(function (e) {
+                var option = document.createElement('option');
+                option.value = e.Names;
+                pdfSuggestionsList.appendChild(option);
+            });
+        });
+    }
+};
+
+
+xHttp.open('GET', 'student_list.xlsx', true);
+xHttp.send();
+xHttp.responseType = "arraybuffer";
+
