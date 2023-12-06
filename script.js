@@ -1,7 +1,7 @@
 function loadPDF() {
-    const pdfName = document.getElementById('pdfName').value;
-    const pdfPassword = document.getElementById('pdfPassword').value;
-    const pdfViewer = document.getElementById('pdfViewer');
+    let pdfName = document.getElementById('pdfName').value;
+    let pdfPassword = document.getElementById('pdfPassword').value;
+    let pdfViewer = document.getElementById('pdfViewer');
 
     if (pdfName == 'undefined' || pdfName == null || pdfName == "") {
         alert('Please enter PDF name');
@@ -14,6 +14,9 @@ function loadPDF() {
     // PDF.js logic to display the PDF
     //const loadingTask = pdfjsLib.getDocument({ url: `path/to/pdfs/${pdfName}.pdf`, password: pdfPassword });
     if (pdfName != 'undefined' && pdfName != "" && pdfPassword != 'undefined' && pdfPassword != "") {
+        if (pdfName.lastIndexOf(".") != -1) {
+            pdfName = pdfName.substring(0, pdfName.lastIndexOf("."));
+        }
         const loadingTask = pdfjsLib.getDocument({ url: `${pdfName}.pdf`, password: pdfPassword });
         console.log('Loading PDF...');
         loadingTask.promise.then(function (pdfDoc) {
