@@ -4,7 +4,7 @@ function loadPDF() {
     let pdfViewer = document.getElementById('pdfViewer');
 
     if (pdfName == 'undefined' || pdfName == null || pdfName == "") {
-        alert('Please enter PDF name');
+        alert('Please enter student name');
     }
 
     if (pdfPassword == 'undefined' || pdfPassword == null || pdfPassword == "") {
@@ -64,7 +64,7 @@ function viewPDFOnPage(pdfName, pdfPassword) {
 function downloadPDF() {
     let pdfName = document.getElementById("pdfName").value;
     if (pdfName == 'undefined' || pdfName == null || pdfName == "") {
-        alert('Please enter PDF name');
+        alert('Please enter student name');
     }
     if (pdfName != 'undefined' && pdfName != "") {
         if (pdfName.lastIndexOf(".") != -1) {
