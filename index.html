@@ -3,14 +3,23 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta charset="UTF-8">
 
     <script type="module" src="build/pdf.mjs"></script>
     <script type="module" src="build/pdf.worker.mjs"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <title>MAKTAB - Kharalwadi</title>
 </head>
@@ -21,11 +30,9 @@
         <h2>Jama Masjid, Kharalwadi, Pimpri, Pune</h2>
         <label for="pdfName">Taalib ka Naam:</label>
         <datalist id="nameSuggestions"></datalist>
-        <input type="text" id="pdfName" placeholder="Talib ka naam type kare..." list="nameSuggestions" autocomplete="off required>
-        <label for=" pdfPassword">Result passcode:</label>
-        <input type="text" id="pdfPassword" placeholder="Password type kare...">
-        <button id="loadpdf" onclick="loadPDF()">Load PDF</button>
-        <div id="pdfViewer"></div>
+        <input type="text" id="pdfName" placeholder="Talib ka naam type kare..." list="nameSuggestions"
+            autocomplete="off" required>
+        <button type=" button" id="downloadpdf" onclick="downloadPDF()"> View Result</button>
     </div>
     <script src="script.js"></script>
 </body>

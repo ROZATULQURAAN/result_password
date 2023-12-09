@@ -16,11 +16,11 @@ function loadPDF() {
         if (pdfName.lastIndexOf(".") != -1) {
             pdfName = pdfName.substring(0, pdfName.lastIndexOf("."));
         }
-        downloadPDF(pdfName.toUpperCase(), pdfPassword);
+        viewPDFOnPage(pdfName.toUpperCase(), pdfPassword);
     }
 }
 
-function downloadPDF(pdfName, pdfPassword) {
+function viewPDFOnPage(pdfName, pdfPassword) {
     const loadingTask = pdfjsLib.getDocument({ url: `${pdfName}.pdf`, password: pdfPassword });
     console.log('Loading PDF...');
     loadingTask.promise.then(function (pdfDoc) {
@@ -61,17 +61,44 @@ function downloadPDF(pdfName, pdfPassword) {
     });
 }
 
-document.getElementById("pdfPassword").addEventListener("keypress", function (event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        document.getElementById("loadpdf").click();
+function downloadPDF() {
+    let pdfName = document.getElementById("pdfName").value;
+    if (pdfName == 'undefined' || pdfName == null || pdfName == "") {
+        alert('Please enter PDF name');
     }
-});
+    if (pdfName != 'undefined' && pdfName != "") {
+        if (pdfName.lastIndexOf(".") != -1) {
+            pdfName = pdfName.substring(0, pdfName.lastIndexOf("."));
+        }
+
+        pdfName = pdfName + ".pdf";
+        window.open(encodeURI(pdfName));
+        /* const xHttp = new XMLHttpRequest();
+         xHttp.onload = function () {
+             const arrayBuffer = this.response;
+             if (arrayBuffer) {
+                 const byteArray = new Uint8Array(arrayBuffer);
+                 byteArray.forEach((element, index) => {
+ 
+                 });
+                 let blob = new Blob([byteArray], { type: "application/pdf" });
+                 let link = document.createElement('a');
+                 link.href = window.URL.createObjectURL(blob);
+                 link.download = pdfName;
+                 link.click();
+             }
+         };
+ 
+         xHttp.open('GET', pdfName, true);
+         xHttp.send();
+         xHttp.responseType = "arraybuffer";*/
+    }
+}
 
 document.getElementById("pdfName").addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
         event.preventDefault();
-        document.getElementById("loadpdf").click();
+        document.getElementById("downloadpdf").click();
     }
 });
 
