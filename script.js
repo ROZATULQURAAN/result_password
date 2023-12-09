@@ -68,7 +68,10 @@ function downloadPDF() {
     }
     if (pdfName != 'undefined' && pdfName != "") {
         if (pdfName.lastIndexOf(".") != -1) {
-            pdfName = pdfName.substring(0, pdfName.lastIndexOf("."));
+            let ext = pdfName.substring(pdfName.lastIndexOf(".") + 1, pdfName.length);
+            if ('pdf' == ext) {
+                pdfName = pdfName.substring(0, pdfName.lastIndexOf("."));
+            }
         }
 
         pdfName = pdfName + ".pdf";
