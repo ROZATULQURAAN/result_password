@@ -117,6 +117,7 @@ xHttp.onload = function () {
         let workbook = XLSX.read(fileData, { type: "array" });
         workbook.SheetNames.forEach(sheet => {
             let rowData = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
+			rowData.sort((a, b) => { return a.Names.toLowerCase() > b.Names.toLowerCase() ? 1 : -1; });
             // Populate the datalist with suggestions
             var pdfSuggestionsList = document.getElementById('nameSuggestions');
             rowData.forEach(function (e) {
