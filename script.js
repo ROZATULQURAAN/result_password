@@ -69,12 +69,12 @@ function downloadPDF() {
     if (pdfName != 'undefined' && pdfName != "") {
         if (pdfName.lastIndexOf(".") != -1) {
             let ext = pdfName.substring(pdfName.lastIndexOf(".") + 1, pdfName.length);
-            if ('pdf' == ext) {
+            if ('pdf' == ext.toLowerCase()) {
                 pdfName = pdfName.substring(0, pdfName.lastIndexOf("."));
             }
         }
 
-        pdfName = pdfName + ".pdf";
+        pdfName = pdfName.toUpperCase() + ".pdf";
         window.open(encodeURI(pdfName));
         /* const xHttp = new XMLHttpRequest();
          xHttp.onload = function () {
@@ -117,7 +117,7 @@ xHttp.onload = function () {
         let workbook = XLSX.read(fileData, { type: "array" });
         workbook.SheetNames.forEach(sheet => {
             let rowData = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheet]);
-			rowData.sort((a, b) => { return a.Names.toLowerCase() > b.Names.toLowerCase() ? 1 : -1; });
+            rowData.sort((a, b) => { return a.Names.toLowerCase() > b.Names.toLowerCase() ? 1 : -1; });
             // Populate the datalist with suggestions
             var pdfSuggestionsList = document.getElementById('nameSuggestions');
             rowData.forEach(function (e) {
