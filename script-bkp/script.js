@@ -7,12 +7,12 @@ function loadPDF() {
         alert('Please enter student name');
     }
 
-   /* if (pdfPassword == 'undefined' || pdfPassword == null || pdfPassword == "") {
+    if (pdfPassword == 'undefined' || pdfPassword == null || pdfPassword == "") {
         alert('Please enter PDF password');
-    }*/
+    }
     // PDF.js logic to display the PDF
     //const loadingTask = pdfjsLib.getDocument({ url: `path/to/pdfs/${pdfName}.pdf`, password: pdfPassword });
-    if (pdfName != 'undefined' && pdfName != "") {
+    if (pdfName != 'undefined' && pdfName != "" && pdfPassword != 'undefined' && pdfPassword != "") {
         if (pdfName.lastIndexOf(".") != -1) {
             pdfName = pdfName.substring(0, pdfName.lastIndexOf("."));
         }
